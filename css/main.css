@@ -3,8 +3,63 @@
    height: 200px;
    margin: 15px;
    border-radius: 2.5%;
-   background-image:
+   background-image: 
    linear-gradient(
      rgb(0, 255, 242), #128c91
    );
+}
+
+.pairA {
+   background-image:  
+   linear-gradient(
+      rgb(255, 0, 0), #911212
+   );
+}
+
+.pairB {
+   background-image:  
+   linear-gradient(
+      rgb(229, 255, 0), #899112
+   );
+}
+
+.pairC {
+   background-image:  
+   linear-gradient(
+      rgb(247, 0, 255), #911287
+   );
+}
+.pairD {
+   background-image:  
+   linear-gradient(
+      rgb(0, 0, 0), #ffffff
+   ); 
+}
+
+.pairE {
+   background-image:  
+   linear-gradient(
+      rgb(21, 255, 0), #2ca10f
+   ); 
+}
+
+.pairF {
+   background-image:  
+   linear-gradient(
+      rgba(140, 236, 243, 0), #92a10f
+   ); 
+}
+
+.pairG {
+   background-image:  
+   linear-gradient(
+      rgb(17, 0, 255), #0f31a1
+   ); 
+}
+
+.pairH {
+   background-image:  
+   linear-gradient(
+      rgb(174, 0, 255), #5f0fa1
+   ); 
 }
