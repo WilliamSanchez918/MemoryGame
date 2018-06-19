@@ -1,8 +1,4 @@
-row {
-   margin-left: auto;
-   margin-right: auto;
-}
-
+/* DEFAULT CARD STYLES */
 .col {
    max-width:150px;
    height: 200px;
@@ -15,61 +11,83 @@ row {
    linear-gradient(141deg, #0fb8ad 0%, #1fc8db 51%, #2cb5e8 75%);
 }
 
+
+/* Pair 1 - HEARTS */
 .pairA {
    background-color: pink;
    background-image: url("img/heart.svg");
    background-repeat: no-repeat;
    background-position: center;
    background-size: 100px; 
-   border: black;
-   border-style: solid;
-   border-width: 2px;
 }
 
+
+/* Pair 2 - FLAME */
 .pairB {
-   background-image:  
-   linear-gradient(
-      rgb(229, 255, 0), #899112
-   );
+   background-color: red;
+   background-image: url("img/flame.svg");
+   background-repeat: no-repeat;
+   background-position: center;
+   background-size: 100px; 
 }
 
+
+/* Pair 3 - SMILEY */
 .pairC {
-   background-image:  
-   linear-gradient(
-      rgb(247, 0, 255), #911287
-   );
+   background-color: rgb(0, 255, 106);
+   background-image: url("img/smiley.svg");
+   background-repeat: no-repeat;
+   background-position: center;
+   background-size: 100px;
 }
+
+
+/* Pair 4 - HOME */
 .pairD {
-   background-image:  
-   linear-gradient(
-      rgb(0, 0, 0), #ffffff
-   ); 
+   background-color: rgb(219, 219, 219);
+   background-image: url("img/home.svg");
+   background-repeat: no-repeat;
+   background-position: center;
+   background-size: 100px; 
 }
 
+
+/* Pair 5 - HUBOT */
 .pairE {
-   background-image:  
-   linear-gradient(
-      rgb(21, 255, 0), #2ca10f
-   ); 
+   background-color: rgb(255, 94, 0);
+   background-image: url("img/hubot.svg");
+   background-repeat: no-repeat;
+   background-position: center;
+   background-size: 100px; 
 }
 
+
+/* Pair 6 - OCTOFACE */
 .pairF {
-   background-image:  
-   linear-gradient(
-      rgba(140, 236, 243, 0), #92a10f
-   ); 
-}
+      background-color: rgb(0, 255, 200);
+      background-image: url("img/octoface.svg");
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: 100px; 
+   }
 
+
+/* Pair 7 - GLOBE */   
 .pairG {
-   background-image:  
-   linear-gradient(
-      rgb(17, 0, 255), #0f31a1
-   ); 
+   background-color: rgb(212, 0, 255);
+   background-image: url("img/globe.svg");
+   background-repeat: no-repeat;
+   background-position: center;
+   background-size: 100px; 
 }
 
+
+/* Pair 8 - LIGHTBULB */
 .pairH {
-   background-image:  
-   linear-gradient(
-      rgb(174, 0, 255), #5f0fa1
+   background-color: rgb(238, 255, 0);
+   background-image: url("img/light-bulb.svg");
+   background-repeat: no-repeat;
+   background-position: center;
+   background-size: 100px;
    ); 
 }
