@@ -10,8 +10,9 @@ document.addEventListener('DOMContentLoaded', function () {
    for (let i = 0; i < 16; i++){
        const newElement = document.createElement('div');
        let tileLoc = cardLoc[i]
-       newElement.innerText = 'this is a new card';
+       newElement.innerText = '';
        newElement.classList.add("col");
+       newElement.classList.add("justify-content-center");
        newElement.id = tileLoc;
        
        //EVENT LISTENERS //
