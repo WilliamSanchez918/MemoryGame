@@ -12,7 +12,6 @@ document.addEventListener('DOMContentLoaded', function () {
        let tileLoc = cardLoc[i]
        newElement.innerText = '';
        newElement.classList.add("col");
-       newElement.classList.add("justify-content-center");
        newElement.id = tileLoc;
        
        //EVENT LISTENERS //
