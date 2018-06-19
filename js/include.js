@@ -48,9 +48,6 @@ function tileSort() {
 
 //Card Select //
 function cardSelect() {
-    return console.log("TEST");
+    let element = this.id;
+    return console.log(element);
 }
-
-$('.col').click(function() {
-    console.log("BEEP");
-});
