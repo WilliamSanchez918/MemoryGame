@@ -90,3 +90,7 @@
    background-position: center;
    background-size: 100px; 
 }
+
+.inUse {
+   display: block;
+}
