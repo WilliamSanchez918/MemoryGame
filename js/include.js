@@ -256,7 +256,7 @@ function cardSelect() {
         
         // IF NO PAIR IS FOUND ISSUE RESET IF 2 UNMATCHING CARDS ARE SELECTED //
         if (stopFunc == false) {
-            cardChecker()
+            setTimeout(function() { cardChecker(); }, 1000);
         } else {
             return;
         }
@@ -264,12 +264,12 @@ function cardSelect() {
 }
 
 //ALERT//
-function Alert() {
-    window.alert("Standby");
-    }
+
 
 //WINNER CIRCLE //
 function cardReset() {
+    document.getElementById("container").style.display = "none";
+
     for (a = 0; a <= 16; a++) {
         let b = document.getElementById(a);
         b.classList.remove("paired");
