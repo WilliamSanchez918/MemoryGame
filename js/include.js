@@ -80,11 +80,12 @@ function pairBinding(t, ele, element) {
     } else {
         if (element <= 2) {
             let totalCount = cardFinder(1)
-                // if total count returns true a pair is found - ref cardFinder(x) func //
+                // if total count returns true: a pair is found - ref cardFinder(x) func //
                 if (totalCount == 1 ) {
                     ele.classList.toggle("pairA");
                     console.log("PAIR FOUND")
                     EventRemoval(1);
+                    // PREVENTS RESET
                     let stopFunc = true;
                     return
                 }    
@@ -165,7 +166,7 @@ function tileSort() {
    console.log(cardLoc);
 }
 
-// CARD Tracker//
+// CARD PAIR TRACKER//
 function cardFinder(a) {
     if (a == 1 ) {
         const pair = document.querySelectorAll(".pairA");
@@ -209,7 +210,7 @@ function cardFinder(a) {
     }
 }
 
-// CARD CHECKER - Checks if unmatched pairs == 2 (if so a reset for both cards is issued) //
+// CARD CHECKER - Checks if unmatched cards == 2 (if so a reset for both cards is issued) //
 function cardChecker() {
     const totalCount = document.querySelectorAll(".inUse");
     let tally = totalCount.length;
@@ -239,7 +240,7 @@ function EventRemoval(a) {
     }
 }
 
-//Card Select //
+//Card EVENT LISTENER FUNC -  Select //
 function cardSelect() {
     let stopFunc = false;
     let element = this.id;
@@ -249,8 +250,11 @@ function cardSelect() {
         return console.log("Card Already Flipped")
     } else {
         ele.classList.toggle("inUse");
+        // CHECK 1
         t = true;
         pairBinding(t, ele, element)
+        
+        // IF NO PAIR IS FOUND ISSUE RESET IF 2 UNMATCHING CARDS ARE SELECTED //
         if (stopFunc == false) {
             cardChecker()
         } else {
@@ -271,4 +275,3 @@ function cardReset() {
         b.classList.remove("paired");
     }
 }
-
