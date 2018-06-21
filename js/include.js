@@ -1,51 +1,84 @@
 
     // DOM READINESS //
 document.addEventListener('DOMContentLoaded', function () {
-    eleCounter = 0;
-    // SORT CALL //
-    tileSort()
-
-    // HIDE //
-   document.getElementById("container").style.display = "none";
-   document.getElementById("alert").style.display = "none";
-
-    // Tile Population //
-   const fragment = document.createDocumentFragment();
-   for (let i = 0; i < 16; i++){
-       const newElement = document.createElement('div');
-       let tileLoc = cardLoc[i]
-       newElement.innerText = '';
-       newElement.classList.add("col");
-       newElement.id = tileLoc;
-       
-       //EVENT LISTENERS //
-       newElement.addEventListener("click", cardSelect)
-       fragment.appendChild(newElement);
-       if (i < 4) {
-        const tracker = document.querySelector('#row1');
-        //APPEND TO BODY //
-        tracker.appendChild(fragment)  
-       } else if (i < 8) {
-        const tracker = document.querySelector('#row2');
-        tracker.appendChild(fragment)
-       } else if (i < 12) {
-        const tracker = document.querySelector('#row3');
-        tracker.appendChild(fragment)
-       } else {
-        const tracker = document.querySelector('#row4');
-        tracker.appendChild(fragment)
-       }
-    }
-
-    // REVEAL //
-    document.getElementById("container").style.display = "block";
-    console.log('the DOM is ready to be interacted with!');
+    tileSummons.create();
 });
 
 //CARD LOCATIONS AND STARTING VALS
+document.getElementById("alert").style.display = "none";
 const cardLoc = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];   
 let pairsOverall = 0;
 let t = false;
+const parentIdNumber = {
+    1 : document.getElementById("row1"),
+    2 : document.getElementById("row2"),
+    3 : document.getElementById("row3"),
+    4 : document.getElementById("row4"),
+}
+const tileSummons = {
+    create : function () {
+        // SORT CALL //
+        tileSort();
+         // HIDE //
+        document.getElementById("container").style.display = "none";
+        // Tile Population //
+        const fragment = document.createDocumentFragment();
+        for (let i = 0; i < 16; i++){
+            const newElement = document.createElement('div');
+            let tileLoc = cardLoc[i]
+            newElement.innerText = '';
+            newElement.classList.add("col");
+            newElement.id = tileLoc;
+            //EVENT LISTENERS //
+            newElement.addEventListener("click", cardSelect)
+            fragment.appendChild(newElement);
+            if (i < 4) {
+                const tracker = document.querySelector('#row1');
+                //APPEND TO BODY //
+                tracker.appendChild(fragment)  
+            } else if (i < 8) {
+                const tracker = document.querySelector('#row2');
+                tracker.appendChild(fragment)
+                    } else if (i < 12) {
+                        const tracker = document.querySelector('#row3');
+                        tracker.appendChild(fragment)
+                            } else {
+                                const tracker = document.querySelector('#row4');
+                                tracker.appendChild(fragment);
+                                }
+            }
+            // REVEAL //
+        document.getElementById("container").style.display = "block";
+        console.log('the DOM is ready to be interacted with!');    
+        },
+        
+    restart : function () {
+        pairsOverall = 0;
+        t = false;
+        for (a = 1; a <= 16; a++) {
+            let d = document.getElementById(a);
+            console.log(d);
+            d.parentElement.removeChild(d);  
+            }
+            setTimeout(function() { tileSummons.create(); }, 1000);
+
+    }
+}
+const sound2 = "sound/buzz.mp3";
+function sort(src) {
+    this.sound = document.createElement("audio");
+    this.sound.src = src;
+    this.sound.setAttribute("preload", "auto");
+    this.sound.setAttribute("controls", "none");
+    this.sound.style.display = "none";
+    document.body.appendChild(this.sound);
+    this.play = function(){
+        this.sound.play();
+    }
+    this.stop = function(){
+        this.sound.pause();
+    }
+}
 
 //PAIR BINDING FUNCTION //
 // t false value is passed to unmatched pairs //
@@ -210,6 +243,10 @@ function cardFinder(a) {
     }
 }
 
+function pairFound(totalCount) {
+
+}
+
 // CARD CHECKER - Checks if unmatched cards == 2 (if so a reset for both cards is issued) //
 function cardChecker() {
     const totalCount = document.querySelectorAll(".inUse");
@@ -234,8 +271,8 @@ function EventRemoval(a) {
         //WINNING //
         if (pairsOverall == 16) {
             console.log(pairsOverall);
-            alert()
-            cardReset();
+            alert();
+            tileSummons.restart();
         }
     }
 }
@@ -263,15 +300,4 @@ function cardSelect() {
     }
 }
 
-//ALERT//
 
-
-//WINNER CIRCLE //
-function cardReset() {
-    document.getElementById("container").style.display = "none";
-
-    for (a = 0; a <= 16; a++) {
-        let b = document.getElementById(a);
-        b.classList.remove("paired");
-    }
-}
