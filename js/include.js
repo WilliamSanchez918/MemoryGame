@@ -9,6 +9,7 @@ document.getElementById("alert").style.display = "none";
 const cardLoc = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];   
 let pairsOverall = 0;
 let t = false;
+let animationZ = false;
 const parentIdNumber = {
     1 : document.getElementById("row1"),
     2 : document.getElementById("row2"),
@@ -84,10 +85,12 @@ function sort(src) {
 // t false value is passed to unmatched pairs //
 // t true value, ele, and element values are passed to matching pairs//
 function pairBinding(t, ele, element) {
+    animationZ = false;
     if (t == false) {
         for (let d = 1; d <= 16; d++) {
             let x = d;
             let b = document.getElementById(d);
+            b.classList.remove("colShake");
             console.log("Element ID: " + b);
             if (b.classList.contains("inUse")) {
                 b.classList.toggle("inUse");
@@ -243,20 +246,17 @@ function cardFinder(a) {
     }
 }
 
-function pairFound(totalCount) {
-
-}
-
 // CARD CHECKER - Checks if unmatched cards == 2 (if so a reset for both cards is issued) //
-function cardChecker() {
+function cardChecker(ele) {
     const totalCount = document.querySelectorAll(".inUse");
     let tally = totalCount.length;
+    console.log(ele)
     console.log("Tally: " + tally)
     if (tally > 1 ) {
             t = false;
             pairBinding(t);
         }
-    }  
+    }
 
 //REMOVE EVENT LISTENERS FOR PAIRS & Winning Check //
 function EventRemoval(a) {
@@ -279,25 +279,45 @@ function EventRemoval(a) {
 
 //Card EVENT LISTENER FUNC -  Select //
 function cardSelect() {
-    let stopFunc = false;
-    let element = this.id;
-    console.log(element);
-    let ele = document.getElementById(element);
-    if (ele.classList.contains("inUse")) {
-        return console.log("Card Already Flipped")
-    } else {
-        ele.classList.toggle("inUse");
-        // CHECK 1
-        t = true;
-        pairBinding(t, ele, element)
-        
-        // IF NO PAIR IS FOUND ISSUE RESET IF 2 UNMATCHING CARDS ARE SELECTED //
-        if (stopFunc == false) {
-            setTimeout(function() { cardChecker(); }, 1000);
+    if (animationZ == false) {
+        let stopFunc = false;
+        let element = this.id;
+        console.log(element);
+        let ele = document.getElementById(element);
+        if (ele.classList.contains("inUse")) {
+            return console.log("Card Already Flipped")
         } else {
-            return;
+            ele.classList.toggle("inUse");
+            // CHECK 1
+            t = true;
+            pairBinding(t, ele, element)
+            
+            // IF NO PAIR IS FOUND ISSUE RESET IF 2 UNMATCHING CARDS ARE SELECTED //
+            if (stopFunc == false) {
+                cardShaker(ele)
+                setTimeout(function() { cardChecker(ele) }, 2500);
+            } else {
+                return;
+            }
         }
     }
 }
 
+//ANIMATIONS // !!!!!! ???
 
+//CARD DING //
+function cardShaker(ele) {
+    const totalCount = document.querySelectorAll(".inUse");
+    let tally = totalCount.length;
+    if (tally > 1) {
+        animationZ = true;
+        for (let d = 1; d <= 16; d++) {
+            let x = d;
+            let b = document.getElementById(d);
+            console.log("Element ID: " + b);
+            if (b.classList.contains("inUse")) {
+                b.classList.add("colShake");
+                }
+            }
+        }
+} 
