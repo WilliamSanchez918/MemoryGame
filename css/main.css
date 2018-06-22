@@ -1,3 +1,25 @@
+html, body, main {
+   height: 100%;
+   width: 100%;
+   }
+
+.container {
+   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+   }
+
+.card {
+   z-index: 3;
+   position: absolute;
+   width: 50%;
+   margin-top: 425px;
+   margin-left: 25%;
+   margin-right: 25%;
+   display: none;
+   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+   border: 1px solid #4195fc
+   }
+
+
 /* DEFAULT CARD STYLES */
 .col {
    max-width:150px;
@@ -9,7 +31,7 @@
    border-width: 2px;
    background-image: 
    linear-gradient(141deg, #0fb8ad 0%, #1fc8db 51%, #2cb5e8 75%);
-}
+   }
 
 
 /* Pair 1 - HEARTS */
@@ -19,7 +41,7 @@
    background-repeat: no-repeat;
    background-position: center;
    background-size: 100px; 
-}
+   }
 
 
 /* Pair 2 - FLAME */
@@ -29,7 +51,7 @@
    background-repeat: no-repeat;
    background-position: center;
    background-size: 100px; 
-}
+   }
 
 
 /* Pair 3 - SMILEY */
@@ -39,7 +61,7 @@
    background-repeat: no-repeat;
    background-position: center;
    background-size: 100px;
-}
+   }
 
 
 /* Pair 4 - HOME */
@@ -49,7 +71,7 @@
    background-repeat: no-repeat;
    background-position: center;
    background-size: 100px; 
-}
+   }
 
 
 /* Pair 5 - HUBOT */
@@ -59,7 +81,7 @@
    background-repeat: no-repeat;
    background-position: center;
    background-size: 100px; 
-}
+   }
 
 
 /* Pair 6 - OCTOFACE */
@@ -79,7 +101,7 @@
    background-repeat: no-repeat;
    background-position: center;
    background-size: 100px; 
-}
+   }
 
 
 /* Pair 8 - LIGHTBULB */
@@ -89,18 +111,112 @@
    background-repeat: no-repeat;
    background-position: center;
    background-size: 100px; 
-}
+   }
 
 /* Checker */
 .inUse {
    display: block;
-}
+   }
+
+.topTrans {
+   z-index: 1;
+   width: 100%;
+   height: 700px;
+   border-radius: 2.5%;
+   background-image: linear-gradient(to bottom, #424f60, #707685, #9ea1ab, #cdced3, #fdfdfd);
+   position: absolute;
+   animation-name: moveUp;
+   animation-duration: 8s;
+   animation-direction: alternate;
+   animation-iteration-count: infinite;
+   }
+
+.botTrans {
+   z-index: 2;
+   width: 100%;
+   height: 500px;
+   border-radius: 2.5%;
+   background-image: linear-gradient(to top, #d8103b, #db3551, #dc4d65, #db6179, #d8748a);
+   position: absolute;
+   animation-name: moveDown;
+   animation-duration: 8s;
+   animation-direction: alternate;
+   animation-iteration-count: infinite;
+   }
 
 .colShake {
    background-color: red;
    animation-name: shake;
    animation-duration: 2s;
-   animation-iteration-count: 1;
+   animation-iteration-count: 2;
+   }
+ 
+ .glow {
+   z-index: 3;
+   border: 5px;
+   animation-name: glowing;
+   animation-duration: 5s;
+   animation-iteration-count: infinite;
+   }
+
+   .hidden {
+      visibility: hidden;
+      opacity: 0;
+      transition: visibility 0s 2s, opacity 2s linear;
+    }
+
+   @keyframes glowing {
+      20% {   
+            -ms-transform: scale(1.05, 1.05); /* IE 9 */
+            -webkit-transform: scale(1.05, 1.05); /* Safari */
+            transform: scale(1.05, 1.05);
+            box-shadow: 2px 5px 5px black; 
+         }
+      40% {
+         -ms-transform: scale(1.07, 1.07); /* IE 9 */
+         -webkit-transform: scale(1.07, 1.07); /* Safari */
+         transform: scale(1.07, 1.07); 
+         box-shadow: 2px 5px 5px black; 
+         }
+      60% {   
+            -ms-transform: scale(1.11, 1.11); /* IE 9 */
+            -webkit-transform: scale(1.11, 1.11); /* Safari */
+            transform: scale(1.11, 1.11);
+            box-shadow: 2px 5px 5px black;
+         }
+      80% {
+            -ms-transform: scale(1.07, 1.07); /* IE 9 */
+            -webkit-transform: scale(1.07, 1.07); /* Safari */
+            transform: scale(1.07, 1.07);
+            box-shadow: 6px 5px 5px black;
+      }
+      100% {
+         -ms-transform: scale(1.06, 1.06); /* IE 9 */
+         -webkit-transform: scale(1.06, 1.06); /* Safari */
+         transform: scale(1.06, 1.06);
+         box-shadow: 2px 5px 5px black; 
+      }
+   }
+
+
+@keyframes moveUp {
+   0% {transform: translate(0,-200px);
+      -ms-transform: translate(0px, -200px); /* IE 9 */
+      -webkit-transform: translate(0px, -200px); /* Safari */;}
+   100% {transform: translate(0,-600px);
+      -ms-transform: translate(0px, -600px); /* IE 9 */
+      -webkit-transform: translate(0px, -600px);} /* Safari */
+}
+
+@keyframes moveDown {
+   0% { transform: translate(0, 450px);
+      -ms-transform: translate(0, 450px);
+      -webkit-transform: translate(0px, 450px);   
+   }
+   100% { transform: translate(0, 550px);
+      -ms-transform: translate(0, 550px);
+      -webkit-transform: translate(0, 550px);      
+   }
 }
 
 @keyframes shake {
@@ -116,3 +232,6 @@
    90% { transform: translate(1px, 2px) rotate(0deg); }
    100% { transform: translate(1px, -2px) rotate(-1deg); }
  }
+
+
+ 

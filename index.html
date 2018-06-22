@@ -12,15 +12,30 @@
     <link rel="stylesheet" type="text/css" href="css/responsive.css">
     <link rel="stylesheet" type="text/css" href="css/main.css">
     <title>Memory Game</title>
+
+
   </head>
   <body>
+      <div class="" id="top"></div>
+      <div class="card bg-light glow" id="card">
+            <div class="card-body">
+              <h4 class="card-title">MEMORY MADNESS</h4>
+              <p class="card-text">Press start to play...</p>
+              <a class="justify-content-center" href="#" class="btn btn-primary" id="start">Start</a>
+            </div>
+          </div></div>
+      <div id="bot"></div>
+      <audio id="buzzer" preload="auto">
+         <source src="sound/buzz.mp3"></source>
+      </audio>
+      <audio id="ding" preload="auto">
+            <source src="sound/correct.wav"></source>
+         </audio>
 
-      <div class="alert alert-success" id="alert" role="alert">
-            <h4 class="alert-heading">Well done!</h4>
-            <p>Aww yeah, you successfully read this important alert message. This example text is going to run a bit longer so that you can see how spacing within an alert works with this kind of content.</p>
-            <hr>
-            <p class="mb-0">Whenever you need to, be sure to use margin utilities to keep things nice and tidy.</p>
-          </div>
+
+      <audio id="begin" preload="auto">
+               <source src="sound/game-start.ogg"></source>
+         </audio>
 
     <div class="container" id="container">
        <div class="row justify-content-center" id="row1">
@@ -32,6 +47,8 @@
       <div class="row justify-content-center" id="row4">
       </div>
     </div>
+
+
    
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -40,5 +57,9 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <!-- local JavaScript -->
     <script src="js/include.js"></script>
+
+    <audio id="intro" preload="auto">
+         <source src="sound/fanfare.wav"></source>
+   </audio>
    </body>
 </html>
