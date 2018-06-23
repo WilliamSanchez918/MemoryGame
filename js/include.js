@@ -1,144 +1,47 @@
-   // DOM READINESS //
 document.addEventListener('DOMContentLoaded', function () {
     tileSummons.create();
-    document.getElementById("start").addEventListener("click", hideTrans);
+    document.getElementById("start").addEventListener("click", animators.hideTrans);
     
 });
 
 //CARD LOCATIONS AND STARTING VALS
 
-const cardLoc = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];   
+const cardLoc = [];
+const definedPairs = [];
+let pairSize = 0;   
 let pairsOverall = 0;
 let t = false;
 let animationZ = true;
 let botTranz = false;
 let topTranz = false;
-const parentIdNumber = {
-    1 : document.getElementById("row1"),
-    2 : document.getElementById("row2"),
-    3 : document.getElementById("row3"),
-    4 : document.getElementById("row4"),
-}
-const tileSummons = {
-    create : function () {
-        // SORT CALL //
-        tileSort();
-         // HIDE //
-         document.getElementById("container").style.display = "none";
-         document.getElementById("bot").style.display = "none";
-         document.getElementById("top").style.display = "none";
-
-         topTrans();
-         botTrans();
 
 
-        // Tile Population //
-        const fragment = document.createDocumentFragment();
-        for (let i = 0; i < 16; i++){
-            const newElement = document.createElement('div');
-            let tileLoc = cardLoc[i]
-            newElement.innerText = '';
-            newElement.classList.add("col");
-            newElement.id = tileLoc;
-            //EVENT LISTENERS //
-            newElement.addEventListener("click", cardSelect)
-            fragment.appendChild(newElement);
-            if (i < 4) {
-                const tracker = document.querySelector('#row1');
-                //APPEND TO BODY //
-                tracker.appendChild(fragment)  
-            } else if (i < 8) {
-                const tracker = document.querySelector('#row2');
-                tracker.appendChild(fragment)
-                    } else if (i < 12) {
-                        const tracker = document.querySelector('#row3');
-                        tracker.appendChild(fragment)
-                            } else {
-                                const tracker = document.querySelector('#row4');
-                                tracker.appendChild(fragment);
-                                }
-            }
-            // REVEAL //
-        console.log('the DOM is ready to be interacted with!'); 
-        setTimeout(function() { 
-            document.getElementById("card").style.display = "block";
-            document.getElementById("container").style.display = "block"; }, 1000);
-        
+////////////// FUNCTION DECLARATIONS /////////////
 
-        },
-        
-    restart : function () {
-        document.getElementById("intro").play();
-        pairsOverall = 0;
-        t = false;
-        animationZ = true;
-        botTranz = false;
-        topTranz = false;
-        let x = document.getElementById("card");
-        x.classList.remove("hidden");
-        x = null;
-
-        topTrans();
-        botTrans();
-        for (a = 1; a <= 16; a++) {
-            let d = document.getElementById(a);
-            console.log(d);
-            d.parentElement.removeChild(d);  
-            }
-            setTimeout(function() { tileSummons.create(); }, 1000);
-
+function sizeCalc(y) {
+    let x = pairSize;
+    let i = 1;
+    while (i <= x) {
+      y.push(i);
+      if (i == 2 || i == 4 || i == 6 || i == 8) {
+          let y = i / 2;
+          definedPairs.push(y);
+      };
+      i++;
     }
 }
-
-function botTrans() {
-    if (botTranz == false) {
-        document.getElementById("bot").style.display = "block";
-        let temp = document.getElementById("bot")
-        temp.classList.add("botTrans");
-        temp.classList.remove("hidden");
-    } else {
-        let temp = document.getElementById("bot")
-        temp.classList.add("hidden");
-        setTimeout(() => {
-            temp.classList.remove("botTrans")
-            
-        }, 3000);
-    }
-
+//CARD SORTING //
+function tileSort() {
+    cardLoc.sort(function(a, b){
+       return 0.5 - Math.random();
+      });
 }
 
-function topTrans () {
-    if (topTranz == false) {
-        document.getElementById("top").style.display = "block";
-        let temp = document.getElementById("top")
-        temp.classList.add("topTrans");
-        temp.classList.remove("hidden");
-    } else {
-        let temp = document.getElementById("top")
-        temp.classList.add("hidden");
-        setTimeout(() => {
-            temp.classList.remove("topTrans")
-        }, 1000);
-        
-    }
-
-}
-
-function hideTrans () {
-    document.getElementById("intro").pause();
-    let x = document.getElementById("card");
-    x.classList.add("hidden");
-    animationZ = false;
-    topTranz = true;
-    botTranz = true;
-    
-    botTrans();
-    topTrans();
-
-    document.getElementById("begin").play();
-
-}
-
+function pairSort() {
+    definedPairs.sort(function(a, b){
+        return 0.5 - Math.random();
+       });
+ }
 
 //PAIR BINDING FUNCTION //
 // t false value is passed to unmatched pairs //
@@ -177,10 +80,10 @@ function pairBinding(t, ele, element) {
             let totalCount = cardFinder(1)
                 // if total count returns true: a pair is found - ref cardFinder(x) func //
                 if (totalCount == 1 ) {
-                    let audio = document.getElementById("ding");
-                    audio.play()
+                    audioSets.ding();
+
                     ele.classList.toggle("pairA");
-                    console.log("PAIR FOUND")
+                    console.log("PAIR FOUND");
                     EventRemoval(1);
                     // PREVENTS RESET
                     let stopFunc = true;
@@ -191,9 +94,8 @@ function pairBinding(t, ele, element) {
         if (element == 3 || element == 4) {
             let totalCount = cardFinder(2)
                 if (totalCount == 1 ) {
-                    let audio = document.getElementById("ding");
-                    audio.play()
-                    console.log("PAIR FOUND")
+                    audioSets.ding();
+                    console.log("PAIR FOUND");
                     EventRemoval(2);
                     let stopFunc = true;
                 }    
@@ -202,8 +104,7 @@ function pairBinding(t, ele, element) {
         if (element == 5 || element == 6) { 
             let totalCount = cardFinder(3)
                 if (totalCount == 1 ) {
-                    let audio = document.getElementById("ding");
-                    audio.play()
+                    audioSets.ding();
                     console.log("PAIR FOUND")
                     EventRemoval(3);
                     let stopFunc = true;
@@ -213,8 +114,7 @@ function pairBinding(t, ele, element) {
         if (element == 7 || element == 8) {
         let totalCount = cardFinder(4)
                 if (totalCount == 1 ) {
-                    let audio = document.getElementById("ding");
-                    audio.play()
+                    audioSets.ding();
                     console.log("PAIR FOUND")
                     EventRemoval(4);
                     let stopFunc = true;
@@ -224,8 +124,7 @@ function pairBinding(t, ele, element) {
         if (element == 9 || element == 10) {
         let totalCount = cardFinder(5)
                 if (totalCount == 1 ) {
-                    let audio = document.getElementById("ding");
-                    audio.play()
+                    audioSets.ding();
                     console.log("PAIR FOUND")
                     EventRemoval(5);
                     let stopFunc = true;
@@ -235,8 +134,7 @@ function pairBinding(t, ele, element) {
         if (element == 11 || element == 12) {
             let totalCount = cardFinder(6)
             if (totalCount == 1 ) {
-                let audio = document.getElementById("ding");
-                audio.play()
+                audioSets.ding();
                 console.log("PAIR FOUND")
                 EventRemoval(6);
                 let stopFunc = true;
@@ -246,8 +144,7 @@ function pairBinding(t, ele, element) {
         if (element == 13 || element == 14) {
             let totalCount = cardFinder(7)
                 if (totalCount == 1 ) {
-                    let audio = document.getElementById("ding");
-                    audio.play()
+                    audioSets.ding();
                     console.log("PAIR FOUND")
                     EventRemoval(7);
                     let stopFunc = true;
@@ -257,8 +154,7 @@ function pairBinding(t, ele, element) {
         if (element == 15 || element == 16) {
             let totalCount = cardFinder(8)
             if (totalCount == 1 ) {
-                let audio = document.getElementById("ding");
-                audio.play()
+                audioSets.ding();
                 console.log("PAIR FOUND")
                 EventRemoval(8);
                 let stopFunc = true;
@@ -269,13 +165,26 @@ function pairBinding(t, ele, element) {
 
 }
 
-//CARD SORTING //
-function tileSort() {
-    cardLoc.sort(function(a, b){
-       return 0.5 - Math.random();
-      });
-   console.log(cardLoc);
-}
+
+//ANIMATOR //CARD DING //
+function cardShaker(ele) {
+    const totalCount = document.querySelectorAll(".inUse");
+    let tally = totalCount.length;
+    if (tally > 1) {
+        animationZ = true;
+        for (let d = 1; d <= 16; d++) {
+            let x = d;
+            let b = document.getElementById(d);
+            console.log("Element ID: " + b);
+            if (b.classList.contains("inUse")) {
+                b.classList.add("colShake");
+                let audio = document.getElementById("buzzer");
+                audio.play()
+                setTimeout(function() { b.addEventListener("animationend", myEndFunction(b, ele))}, 1000);
+                }
+            }
+        }
+} 
 
 // CARD PAIR TRACKER//
 function cardFinder(a) {
@@ -378,27 +287,187 @@ function cardSelect() {
     }
 }
 
-//ANIMATIONS // !!!!!! ???
+function populate() {
+    const fragment = document.createDocumentFragment();
+    for (let i = 0; i < pairSize; i++){
+        const newElement = document.createElement('div');
+        let tileLoc = cardLoc[i]
+        newElement.innerText = '';
+        newElement.classList.add("col");
+        newElement.id = tileLoc;
+        //EVENT LISTENERS //
+        newElement.addEventListener("click", cardSelect)
+        fragment.appendChild(newElement);
+        if (i < 4) {
+            const tracker = document.querySelector('#row1');
+            //APPEND TO BODY //
+            tracker.appendChild(fragment)  
+        } else if (i < 8) {
+            const tracker = document.querySelector('#row2');
+            tracker.appendChild(fragment)
+                } else if (i < 12) {
+                    const tracker = document.querySelector('#row3');
+                    tracker.appendChild(fragment)
+                        } else {
+                            const tracker = document.querySelector('#row4');
+                            tracker.appendChild(fragment);
+                            }
+        }
+}
+//////////////END FUNCTION DECLARATIONS /////////////
 
-//CARD DING //
-function cardShaker(ele) {
-    const totalCount = document.querySelectorAll(".inUse");
-    let tally = totalCount.length;
-    if (tally > 1) {
+////////OBJECTS////////////
+
+//ANIMATIONS
+const animators = {
+    topTrans : function() {
+        if (topTranz == false) {
+            document.getElementById("top").style.display = "block";
+            let temp = document.getElementById("top")
+            temp.classList.add("topTrans");
+            temp.classList.remove("hidden");
+        } else {
+                let temp = document.getElementById("top")
+                temp.classList.add("hidden");
+                setTimeout(() => {
+                temp.classList.remove("topTrans")
+                
+                }, 3000);
+        }
+    },
+    botTrans : function() {
+        if (botTranz == false) {
+            document.getElementById("bot").style.display = "block";
+            let temp = document.getElementById("bot")
+            temp.classList.add("botTrans");
+            temp.classList.remove("hidden");
+        } else {
+            let temp = document.getElementById("bot")
+            temp.classList.add("hidden");
+            setTimeout(() => {
+                temp.classList.remove("botTrans")
+                
+            }, 3000);
+        }
+    },
+    hideTrans : function() {
+        audioSets.pause();
+
+        let x = document.getElementById("card");
+        x.classList.add("hidden");
+        animationZ = false;
+        topTranz = true;
+        botTranz = true;
+        
+        animators.botTrans();
+        animators.topTrans();
+    
+        audioSets.start();
+    }
+}
+
+//ROW PlACEMENT
+const parentIdNumber = {
+    1 : function() {document.getElementById("row1")},
+    2 : function() {document.getElementById("row2")},
+    3 : function() {document.getElementById("row3")},
+    4 : function() {document.getElementById("row4")},
+}
+
+//TILE CREATION
+const tileSummons = {
+    create : function () {
+        // SORT CALL //
+        pairSize = 16;
+        y = cardLoc;
+
+
+        sizeCalc(y);
+        tileSort();
+        pairSort();
+         // HIDE //
+         document.getElementById("container").style.display = "none";
+         document.getElementById("bot").style.display = "none";
+         document.getElementById("top").style.display = "none";
+
+         animators.topTrans();
+         animators.botTrans();
+
+
+        // Tile Population //
+        populate(pairSize)
+
+        // REVEAL //
+        console.log('the DOM is ready to be interacted with!'); 
+        setTimeout(function() { 
+            document.getElementById("card").style.display = "block";
+            document.getElementById("container").style.display = "block"; 
+            audioSets.intro();
+            }, 1000);
+            
+        
+
+        },
+        
+    restart : function () {
+        audioSets.intro();
+        pairsOverall = 0;
+        t = false;
         animationZ = true;
-        for (let d = 1; d <= 16; d++) {
-            let x = d;
-            let b = document.getElementById(d);
-            console.log("Element ID: " + b);
-            if (b.classList.contains("inUse")) {
-                b.classList.add("colShake");
-                let audio = document.getElementById("buzzer");
-                audio.play()
-                setTimeout(function() { b.addEventListener("animationend", myEndFunction(b, ele))}, 1000);
-                }
+        botTranz = false;
+        topTranz = false;
+        let x = document.getElementById("card");
+        x.classList.remove("hidden");
+        x = null;
+
+        animators.topTrans();
+        animators.botTrans();
+        for (a = 1; a <= 16; a++) {
+            let d = document.getElementById(a);
+            console.log(d);
+            d.parentElement.removeChild(d);  
+            }
+            setTimeout(function() { tileSummons.create(); }, 1000);
+
+    }
+}
+
+// AUDIO
+const audioSets = {
+    ding : function () {
+        document.getElementById("ding").play();
+        document.getElementById("ding").volume = 0.2;
+        },
+    buzz : function () {
+        document.getElementById("buzzer").play();
+        },
+    intro : function () {
+        document.getElementById("intro").play();
+        document.getElementById("intro").volume = 0.1;
+
+        },
+    start : function () {
+        document.getElementById("begin").play();
+        document.getElementById("begin").volume = 0.2
+        },
+    pause : function () {
+        for (let a = 0; a <= 3; a++) {
+            if (a == 1) {
+                document.getElementById("ding").pause();
+            } else if (a == 2) {
+                document.getElementById("buzzer").pause();
+            } else if (a == 3) {
+                document.getElementById("intro").pause();
+            } else {
+                document.getElementById("begin").pause();
             }
         }
-} 
+        }
+
+
+
+}
+
 
 function myEndFunction(b, ele) {
     b.removeEventListener("animationend", myEndFunction);
