@@ -68,6 +68,7 @@ const tileSummons = {
         },
         
     restart : function () {
+        document.getElementById("intro").play();
         pairsOverall = 0;
         t = false;
         animationZ = true;
