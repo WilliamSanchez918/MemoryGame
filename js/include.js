@@ -1,6 +1,8 @@
 document.addEventListener('DOMContentLoaded', function () {
     tileSummons.create();
+    document.getElementById("begin").volume = 0.2
     document.getElementById("start").addEventListener("click", animators.hideTrans);
+;
     
 });
 
@@ -14,6 +16,7 @@ let t = false;
 let animationZ = true;
 let botTranz = false;
 let topTranz = false;
+let totalScore = 0;
 
 
 ////////////// FUNCTION DECLARATIONS /////////////
@@ -23,7 +26,7 @@ function sizeCalc(y) {
     let i = 1;
     while (i <= x) {
       y.push(i);
-      if (i == 2 || i == 4 || i == 6 || i == 8) {
+      if (i == 2 || i == 4 || i == 6 || i == 8 || i == 10 || i == 12 || i ==14 || i == 16) {
           let y = i / 2;
           definedPairs.push(y);
       };
@@ -43,16 +46,28 @@ function pairSort() {
        });
  }
 
+function debufLoop() {
+    let x = document.querySelectorAll(".col2").length;
+    for (a = 1; a <= x; a++) {
+            y=document.getElementById(a);
+            console.log(y)
+            y.classList.remove("col2");            
+    }
+}
+
 //PAIR BINDING FUNCTION //
 // t false value is passed to unmatched pairs //
 // t true value, ele, and element values are passed to matching pairs//
+
 function pairBinding(t, ele, element) {
     animationZ = false;
     if (t == false) {
-        for (let d = 1; d <= 16; d++) {
+        let a = document.querySelectorAll(".col").length;
+        for (let d = 1; d <= a; d++) {
             let x = d;
             let b = document.getElementById(d);
             b.classList.remove("colShake");
+            b.classList.remove("col2")
             console.log("Element ID: " + b);
             if (b.classList.contains("inUse")) {
                 b.classList.toggle("inUse");
@@ -86,7 +101,6 @@ function pairBinding(t, ele, element) {
                     console.log("PAIR FOUND");
                     EventRemoval(1);
                     // PREVENTS RESET
-                    let stopFunc = true;
                     return
                 }    
                 ele.classList.toggle("pairA");
@@ -97,7 +111,6 @@ function pairBinding(t, ele, element) {
                     audioSets.ding();
                     console.log("PAIR FOUND");
                     EventRemoval(2);
-                    let stopFunc = true;
                 }    
                 ele.classList.toggle("pairB"); 
         }
@@ -107,7 +120,6 @@ function pairBinding(t, ele, element) {
                     audioSets.ding();
                     console.log("PAIR FOUND")
                     EventRemoval(3);
-                    let stopFunc = true;
                 }    
                 ele.classList.toggle("pairC");
         } 
@@ -117,7 +129,6 @@ function pairBinding(t, ele, element) {
                     audioSets.ding();
                     console.log("PAIR FOUND")
                     EventRemoval(4);
-                    let stopFunc = true;
                 }    
                 ele.classList.toggle("pairD");     
         }
@@ -127,7 +138,6 @@ function pairBinding(t, ele, element) {
                     audioSets.ding();
                     console.log("PAIR FOUND")
                     EventRemoval(5);
-                    let stopFunc = true;
                 }    
                 ele.classList.toggle("pairE");
         }
@@ -137,7 +147,6 @@ function pairBinding(t, ele, element) {
                 audioSets.ding();
                 console.log("PAIR FOUND")
                 EventRemoval(6);
-                let stopFunc = true;
             }
             ele.classList.toggle("pairF");
         }
@@ -147,7 +156,6 @@ function pairBinding(t, ele, element) {
                     audioSets.ding();
                     console.log("PAIR FOUND")
                     EventRemoval(7);
-                    let stopFunc = true;
                 }    
                 ele.classList.toggle("pairG"); 
         }
@@ -157,34 +165,12 @@ function pairBinding(t, ele, element) {
                 audioSets.ding();
                 console.log("PAIR FOUND")
                 EventRemoval(8);
-                let stopFunc = true;
             }    
             ele.classList.toggle("pairH");
             }
     }
 
 }
-
-
-//ANIMATOR //CARD DING //
-function cardShaker(ele) {
-    const totalCount = document.querySelectorAll(".inUse");
-    let tally = totalCount.length;
-    if (tally > 1) {
-        animationZ = true;
-        for (let d = 1; d <= 16; d++) {
-            let x = d;
-            let b = document.getElementById(d);
-            console.log("Element ID: " + b);
-            if (b.classList.contains("inUse")) {
-                b.classList.add("colShake");
-                let audio = document.getElementById("buzzer");
-                audio.play()
-                setTimeout(function() { b.addEventListener("animationend", myEndFunction(b, ele))}, 1000);
-                }
-            }
-        }
-} 
 
 // CARD PAIR TRACKER//
 function cardFinder(a) {
@@ -278,7 +264,7 @@ function cardSelect() {
             
             // IF NO PAIR IS FOUND ISSUE RESET IF 2 UNMATCHING CARDS ARE SELECTED //
             if (stopFunc == false) {
-                cardShaker(ele)
+                animators.cardshaker(ele)
                 // setTimeout(function() { cardChecker(ele) }, 2500); //
             } else {
                 return;
@@ -286,7 +272,7 @@ function cardSelect() {
         }
     }
 }
-
+// CARD CREATE
 function populate() {
     const fragment = document.createDocumentFragment();
     for (let i = 0; i < pairSize; i++){
@@ -294,6 +280,7 @@ function populate() {
         let tileLoc = cardLoc[i]
         newElement.innerText = '';
         newElement.classList.add("col");
+        newElement.classList.add("col2")
         newElement.id = tileLoc;
         //EVENT LISTENERS //
         newElement.addEventListener("click", cardSelect)
@@ -363,6 +350,31 @@ const animators = {
         animators.topTrans();
     
         audioSets.start();
+
+        //card effect loop //
+        debufLoop();
+
+    },
+    cardshaker: function(ele) {
+        const totalCount = document.querySelectorAll(".inUse");
+        let tally = totalCount.length;
+        if (tally > 1) {
+            animationZ = true;
+            for (let d = 1; d <= 16; d++) {
+                let x = d;
+                let b = document.getElementById(d);
+                console.log("Element ID: " + b);
+                if (b.classList.contains("inUse")) {
+                    b.classList.add("colShake");
+                    audioSets.buzz();
+                    setTimeout(function() { b.addEventListener("animationend", myEndFunction(b, ele))}, 1000);
+                    }
+                }
+            }
+
+    },
+    pair: function() {
+
     }
 }
 
@@ -376,16 +388,19 @@ const parentIdNumber = {
 
 //TILE CREATION
 const tileSummons = {
-    create : function () {
-        // SORT CALL //
+    create : function (e) {
         pairSize = 16;
         y = cardLoc;
 
-
-        sizeCalc(y);
+        //calculates correct tile/pair matching and randomizes tiles //
+        if (e == false || e == undefined) {
+            sizeCalc(y);
+        }
+        
         tileSort();
         pairSort();
-         // HIDE //
+
+         // HIDE ELEMENTS BELOW //
          document.getElementById("container").style.display = "none";
          document.getElementById("bot").style.display = "none";
          document.getElementById("top").style.display = "none";
@@ -410,9 +425,11 @@ const tileSummons = {
         },
         
     restart : function () {
+        //VALUE RESET
         audioSets.intro();
         pairsOverall = 0;
         t = false;
+        //prevents event handler from firing in standby mode//
         animationZ = true;
         botTranz = false;
         topTranz = false;
@@ -422,12 +439,14 @@ const tileSummons = {
 
         animators.topTrans();
         animators.botTrans();
+        //CYCLING CARDS
         for (a = 1; a <= 16; a++) {
             let d = document.getElementById(a);
             console.log(d);
             d.parentElement.removeChild(d);  
             }
-            setTimeout(function() { tileSummons.create(); }, 1000);
+        let e = true;
+        setTimeout(function() { tileSummons.create(e); }, 1000);
 
     }
 }
@@ -447,8 +466,9 @@ const audioSets = {
 
         },
     start : function () {
-        document.getElementById("begin").play();
         document.getElementById("begin").volume = 0.2
+        document.getElementById("begin").play();
+        
         },
     pause : function () {
         for (let a = 0; a <= 3; a++) {
