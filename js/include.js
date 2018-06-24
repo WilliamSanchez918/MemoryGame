@@ -2,8 +2,6 @@ document.addEventListener('DOMContentLoaded', function () {
     tileSummons.create();
     document.getElementById("intro").volume = 0.2
     document.getElementById("begin").volume = 0.2
-    stats.timeDefault();
-    stats.startTime();
     document.getElementById("start").addEventListener("click", animators.hideTrans);
 ;
     
@@ -19,16 +17,12 @@ let t = false;
 let animationZ = true;
 let botTranz = false;
 let topTranz = false;
-let totalScore = 0;
 let setTime = 0;
 let m = 0;
 let s = 0;
+let points = 0
 
 ////////////// FUNCTION DECLARATIONS /////////////
-function checkTime(i) {
-    if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
-    return i;
-}
 
 function sizeCalc(y) {
     let x = pairSize;
@@ -59,7 +53,6 @@ function debufLoop() {
     let x = document.querySelectorAll(".col2").length;
     for (a = 1; a <= x; a++) {
             y=document.getElementById(a);
-            console.log(y)
             y.classList.remove("col2");            
     }
 }
@@ -108,18 +101,21 @@ function pairBinding(t, ele, element) {
 
                     ele.classList.toggle("pairA");
                     console.log("PAIR FOUND");
-                    EventRemoval(1);
                     // PREVENTS RESET
+                    EventRemoval(1);
+                    stats.points(10);
                     return
                 }    
                 ele.classList.toggle("pairA");
         }
         if (element == 3 || element == 4) {
+            animators.pair(element)
             let totalCount = cardFinder(2)
                 if (totalCount == 1 ) {
                     audioSets.ding();
                     console.log("PAIR FOUND");
                     EventRemoval(2);
+                    stats.points(10)
                 }    
                 ele.classList.toggle("pairB"); 
         }
@@ -129,6 +125,7 @@ function pairBinding(t, ele, element) {
                     audioSets.ding();
                     console.log("PAIR FOUND")
                     EventRemoval(3);
+                    stats.points(10)
                 }    
                 ele.classList.toggle("pairC");
         } 
@@ -138,6 +135,7 @@ function pairBinding(t, ele, element) {
                     audioSets.ding();
                     console.log("PAIR FOUND")
                     EventRemoval(4);
+                    stats.points(10)
                 }    
                 ele.classList.toggle("pairD");     
         }
@@ -147,6 +145,7 @@ function pairBinding(t, ele, element) {
                     audioSets.ding();
                     console.log("PAIR FOUND")
                     EventRemoval(5);
+                    stats.points(10)
                 }    
                 ele.classList.toggle("pairE");
         }
@@ -156,6 +155,7 @@ function pairBinding(t, ele, element) {
                 audioSets.ding();
                 console.log("PAIR FOUND")
                 EventRemoval(6);
+                stats.points(10)
             }
             ele.classList.toggle("pairF");
         }
@@ -165,6 +165,7 @@ function pairBinding(t, ele, element) {
                     audioSets.ding();
                     console.log("PAIR FOUND")
                     EventRemoval(7);
+                    stats.points(10)
                 }    
                 ele.classList.toggle("pairG"); 
         }
@@ -174,6 +175,7 @@ function pairBinding(t, ele, element) {
                 audioSets.ding();
                 console.log("PAIR FOUND")
                 EventRemoval(8);
+                stats.points(10)
             }    
             ele.classList.toggle("pairH");
             }
@@ -319,7 +321,7 @@ const stats = {
         let a = document.getElementById("timeBox");
         let node = document.createElement("H2");
         let text = document.createTextNode(setTime + " T ");
-        node.classList.add("text-center", "statusBox1", "dropdown");
+        node.classList.add("text-center", "dropdown", "font-weight-bold", "bg-light");
         node.appendChild(text);
         a.appendChild(node);
         node.id = "time";
@@ -335,12 +337,24 @@ const stats = {
                 setTime = 0;
                 m = m + 1;
             }
-            document.getElementById('time').textContent = m + ":" + x;
-            var t = setTimeout(stats.startTime, 1000);
+            if (x < 10) {
+                document.getElementById('time').textContent = m + ":0" + x;
+            } else {
+                document.getElementById('time').textContent = m + ":" + x;
+            }
+            document.getElementById('points').classList.add('bg-light')
+            document.getElementById('points').classList.remove('combo')
+            let t = setTimeout(stats.startTime, 1000);
 
     },
-    points : function() {
-
+    points : function(x) {
+        points = points + x;
+        document.getElementById('points').textContent = points;
+        document.getElementById('points').classList.remove('bg-light');
+        document.getElementById('points').classList.remove('bg-light');
+        document.getElementById("scoreCard").classList.remove('fadein');
+        document.getElementById('points').classList.add('combo');
+        return points;
     }
 }
 //ANIMATIONS
@@ -350,6 +364,7 @@ const animators = {
             document.getElementById("top").style.display = "block";
             let temp = document.getElementById("top")
             temp.classList.add("topTrans");
+            document.getElementById("card").classList.add("glow");
             temp.classList.remove("hidden");
         } else {
                 let temp = document.getElementById("top")
@@ -377,8 +392,8 @@ const animators = {
     },
     hideTrans : function() {
         audioSets.pause();
-
         let x = document.getElementById("card");
+        x.classList.toggle("glow");
         x.classList.add("hidden");
         animationZ = false;
         topTranz = true;
@@ -386,6 +401,8 @@ const animators = {
         
         animators.botTrans();
         animators.topTrans();
+        stats.timeDefault();
+        animators.stats();
     
         audioSets.start();
 
@@ -411,8 +428,27 @@ const animators = {
             }
 
     },
-    pair: function() {
+    pair: function(element) {
 
+    },
+    stats: function() {
+        setTimeout(function() { 
+            document.getElementById("scoreCard").classList.remove("hidden");
+            document.getElementById("scoreCard").classList.add("fadein");
+            document.getElementById("points").classList.add("statusBox1");
+            document.getElementById("time").classList.add("statusBox1");
+            stats.startTime();
+            }, 1000);
+        setTimeout(function() {
+            document.getElementById("scoreCard").classList.remove("fadein")
+        }, 2000);
+
+    },
+    statsToggle: function(){
+        document.getElementById("scoreCard").classList.add("hidden");
+        document.getElementById("scoreCard").classList.remove("fadein");
+        document.getElementById("points").classList.remove("statusBox1");
+        document.getElementById("time").classList.remove("statusBox1");
     }
 }
 
@@ -463,6 +499,7 @@ const tileSummons = {
         },
         
     restart : function () {
+        setTime = 0;
         //VALUE RESET
         audioSets.intro();
         pairsOverall = 0;
@@ -477,6 +514,7 @@ const tileSummons = {
 
         animators.topTrans();
         animators.botTrans();
+        animators.statsToggle();
         //CYCLING CARDS
         for (a = 1; a <= 16; a++) {
             let d = document.getElementById(a);

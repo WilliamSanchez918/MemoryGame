@@ -3,6 +3,24 @@ html, body, main {
    width: 100%;
    }
 
+#time {
+      margin-bottom: 5%;
+      padding-top: 10%;
+}
+
+#scoreCard:hover{
+      animation-name: shake;
+      animation-duration: 1s;
+      animation-iteration-count: infinite;
+}
+#points {
+      padding-top: 10%;
+      
+}
+.margin-top {
+      margin-top: 50px;
+}
+
 .container {
    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
    }
@@ -19,9 +37,15 @@ html, body, main {
    border: 1px solid #4195fc
    }
 
-
+.combo {
+      background-color: greenyellow;
+      animation-name: glowing;
+      animation-duration: .5s;
+      animation-iteration-count: 1;
+}
 /* DEFAULT CARD STYLES */
 .col {
+   cursor: pointer;
    max-width:150px;
    height: 200px;
    margin: 15px;
@@ -45,12 +69,29 @@ html, body, main {
 .stats {
       border: 1px;
       background: #cdced3;
-      margin: 0%;
+      margin: 0%;   
       border-radius: 5%, 5%, 0, 0;
       height: 50px;
 }
 
+.like {
+      z-index: 4;
+      position: relative;
+      background-image: url("img/thumbsup.svg");
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: 30px 30px;
+      width: 30px;
+      height: 30px;
+      animation-name: shake;
+      animation-duration: 2s;
+      animation-iteration-count: infinite;
+      left: 220px;
+      top: 220px;
+      }
+
 .gear {
+      display: none;
       z-index: 4;
       position: relative;
       background-image: url("img/gear.svg");
@@ -71,12 +112,11 @@ html, body, main {
 
 .statusBox1 {
       z-index: -1;
-      background-color: grey;
-      height: 50px;
+      height: 75px;
       border-radius: 0, 0, 2.5%, 2.5%;
       position: relative;
       animation-name: dropDown;
-      animation-duration: 3s;
+      animation-duration: 5s;
       animation-iteration-count: 1;
 }
 
@@ -214,6 +254,11 @@ html, body, main {
       opacity: 0;
       transition: visibility 0s 2s, opacity 2s linear;
     }
+.block {
+      visibility: visible;
+      opacity: 1;
+      transition: visibility 0s 2s, opacity 2s linear;
+}
 
 .timeKeeper {
       width: 200px;
@@ -222,10 +267,22 @@ html, body, main {
       position: absolute;
       margin-left: 82%;
       margin-top: 7%;
-      border-radius: 15px 50px 30px 5px;
+      border-radius: 50px 50px 5px 5px;
       box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
       
 }
+
+.fadein {
+      animation-name: fadeIn;
+      animation-duration: 5s;
+      animation-iteration-count: 1;
+}
+@keyframes fadeIn {
+      0% {opacity: 0;}
+      100% {opacity: 1;}
+   }
+
+
 
 @keyframes dropDown {
       0% {transform: translate(0,-40px);}
