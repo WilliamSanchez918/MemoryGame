@@ -1,6 +1,9 @@
 document.addEventListener('DOMContentLoaded', function () {
     tileSummons.create();
+    document.getElementById("intro").volume = 0.2
     document.getElementById("begin").volume = 0.2
+    stats.timeDefault();
+    stats.startTime();
     document.getElementById("start").addEventListener("click", animators.hideTrans);
 ;
     
@@ -17,9 +20,15 @@ let animationZ = true;
 let botTranz = false;
 let topTranz = false;
 let totalScore = 0;
-
+let setTime = 0;
+let m = 0;
+let s = 0;
 
 ////////////// FUNCTION DECLARATIONS /////////////
+function checkTime(i) {
+    if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
+    return i;
+}
 
 function sizeCalc(y) {
     let x = pairSize;
@@ -304,7 +313,36 @@ function populate() {
 //////////////END FUNCTION DECLARATIONS /////////////
 
 ////////OBJECTS////////////
+const stats = {
+    timeDefault : function() {
+        document.getElementById("time").remove()
+        let a = document.getElementById("timeBox");
+        let node = document.createElement("H2");
+        let text = document.createTextNode(setTime + " T ");
+        node.classList.add("text-center", "statusBox1", "dropdown");
+        node.appendChild(text);
+        a.appendChild(node);
+        node.id = "time";
+        setTime = 0;
+        var x = document.getElementById("time").textContent;
+        console.log(x);
+   
+    },
+    startTime : function(n) {
+            setTime = setTime +1;
+            let x = setTime;
+            if (x == 60) {
+                setTime = 0;
+                m = m + 1;
+            }
+            document.getElementById('time').textContent = m + ":" + x;
+            var t = setTimeout(stats.startTime, 1000);
 
+    },
+    points : function() {
+
+    }
+}
 //ANIMATIONS
 const animators = {
     topTrans : function() {
