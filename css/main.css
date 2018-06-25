@@ -3,6 +3,31 @@ html, body, main {
    width: 100%;
    }
 
+#yes {
+      border-top-left-radius: 25px;
+      border-top-Right-radius: 25px;
+      border-bottom-left-radius: 5px;
+      margin-left: auto;
+      margin-right: auto;
+      width: 49%;
+      height: 150px;
+      font-size: 225%;
+      left: 15px;
+      right: 15px;
+      
+}   
+
+#win {
+      display: none;
+      z-index: 6;
+      background: #0fb8ad;
+      position: absolute;
+      min-width: 100%;
+      min-height: 100%;
+      animation-name: fadeIn;
+      animation-duration: 3s;
+      animation-iteration-count: 1;
+}
 #time {
       margin-bottom: 5%;
       padding-top: 10%;
@@ -19,6 +44,31 @@ html, body, main {
 }
 .margin-top {
       margin-top: 50px;
+}
+.scoreB {
+      background: grey;
+      width: 100%;
+      height: 25px;
+      animation: rotate;
+      animation-iteration-count: 2;
+      animation-direction: alternate-reverse;
+}
+.zCard {
+      border-top-left-radius: 25px;
+      border-top-Right-radius: 25px;
+      border-bottom-left-radius: 5px;
+      top: 50%;
+      margin-left: 25%;
+      margin-right: 25%;
+      width: 50%;
+      height: 350px;
+      z-index: 7;
+      position: absolute;
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+      animation-name: glowing;
+      animation-duration: 2s;
+      animation-iteration-count: infinite;
+      animation-direction: alternate-reverse;
 }
 
 .container {
@@ -77,17 +127,17 @@ html, body, main {
 .like {
       z-index: 4;
       position: relative;
-      background-image: url("img/thumbsup.svg");
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+      border: black;
       background-repeat: no-repeat;
       background-position: center;
       background-size: 30px 30px;
-      width: 30px;
-      height: 30px;
-      animation-name: shake;
-      animation-duration: 2s;
-      animation-iteration-count: infinite;
-      left: 220px;
-      top: 220px;
+      border-radius: 35%;
+      width: 100%;
+      height: 100%;
+      animation-name: glowing;
+      animation-duration: .25s;
+      animation-iteration-count: 1;
       }
 
 .gear {
@@ -282,7 +332,10 @@ html, body, main {
       100% {opacity: 1;}
    }
 
-
+@keyframes likes {
+      0% { transform: translate(-20px, -100px) rotate(2deg); }
+      100% {transform: translate(-20px, -350px) rotate(-2deg);} 
+}
 
 @keyframes dropDown {
       0% {transform: translate(0,-40px);}
