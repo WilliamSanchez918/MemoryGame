@@ -528,6 +528,8 @@ const tileSummons = {
         
     restart : function () {
         setTime = 0;
+        m = 0;
+        s = 0;
         restart = true;
         //VALUE RESET
         audioSets.intro();
