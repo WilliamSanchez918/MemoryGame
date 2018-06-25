@@ -21,6 +21,7 @@ let setTime = 0;
 let m = 0;
 let s = 0;
 let points = 0
+let restart = false;
 
 ////////////// FUNCTION DECLARATIONS /////////////
 
@@ -335,8 +336,11 @@ const stats = {
         a.appendChild(node);
         node.id = "time";
         setTime = 0;
-        var x = document.getElementById("time").textContent;
-        console.log(x);
+        if (animationZ == false) {
+            var x = document.getElementById("time").textContent;
+            console.log(x);
+            }
+        
    
     },
     startTime : function(n) {
@@ -353,7 +357,11 @@ const stats = {
             }
             document.getElementById('points').classList.add('bg-light')
             document.getElementById('points').classList.remove('combo')
-            let t = setTimeout(stats.startTime, 1000);
+            if (restart == true) {
+                window.clearInterval(t)
+            } else {
+                let t = setTimeout(stats.startTime, 1000);
+            }
 
     },
     points : function(x) {
@@ -484,6 +492,7 @@ const tileSummons = {
     create : function (e) {
         pairSize = 16;
         y = cardLoc;
+        restart = false;
 
         //calculates correct tile/pair matching and randomizes tiles //
         if (e == false || e == undefined) {
@@ -519,6 +528,7 @@ const tileSummons = {
         
     restart : function () {
         setTime = 0;
+        restart = true;
         //VALUE RESET
         audioSets.intro();
         pairsOverall = 0;
