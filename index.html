@@ -9,8 +9,8 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
    
     <!-- Local stylesheets -->
-    <link rel="stylesheet" type="text/css" href="css/responsive.css">
     <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="css/responsive.css">
     <title>Memory MADNESS</title>
   </head>
   <body>
@@ -43,13 +43,16 @@
             <source src="sound/correct.wav"></source>
             
          </audio>
-      <audio autoplay id="intro" preload="auto">
+      <audio autoplay id="intro">
                <source src="sound/fanfare.wav"></source>
          </audio>
 
       <audio id="begin" preload="auto">
                <source src="sound/game-start.ogg"></source>
          </audio>
+         <audio id="winning" preload="auto">
+            <source src="sound/victory.wav"></source>
+      </audio>
 <div class="winner" id="win">
   <div class="bg-light  zCard">
     <h1 class="text-center text-success font-weight-bold">WINNER!</h1>
@@ -69,8 +72,12 @@
       </div>
       <div class="row justify-content-center" id="row4">
       </div>
+      
     </div>
-    <div class="ticker">I WILL SCROLL SVG IMAGES FROM LEFT TO RIGHT</div>
+
+    <div class="" id="footer">
+        <h4 class="text-primary text-center">Produced by <span class="text-danger">VALKOUR</span></h4>
+      </div>
     
 
 

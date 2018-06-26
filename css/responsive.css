@@ -1,0 +1,242 @@
+
+@media only screen and (max-width: 1200px) {
+
+  
+  #time {
+    padding: 2.5%;
+    max-width: 45%;
+  }
+
+  #points {
+    padding: 2.5%;
+  }
+
+  #scoreCard:hover{
+    animation-name: none;
+
+}
+
+  #timeBox {
+    max-width: 45%;
+    top: 2px;
+  }
+  #pointBox {
+    position: relative;
+    left: 80%;
+    bottom: 148px;
+    max-width: 45%;
+  }
+
+  .timeKeeper {
+    width: 100%;
+    height: 100px;
+    z-index: 3;
+    position: absolute;
+    margin-left: 0;
+    margin-top: 0;
+    border-radius: 50px 50px 5px 5px;
+    padding: 5%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    
+}
+
+  .statusBox1 {
+    max-width: 45%;
+    margin: 0%;
+  }
+
+  .stats {
+    border: 1px;
+    background: #cdced3;
+    margin: 0%;
+    max-width: 45%;   
+    border-radius: 5%, 5%, 0, 0;
+    height: 50px;
+
+}
+
+.scoreB {
+  background: grey;
+  width: 100%;
+  height: 25px;
+  animation: rotate;
+  animation-iteration-count: 2;
+  animation-direction: alternate-reverse;
+}
+
+}
+
+
+@media only screen and (max-width: 1199px) {
+  #top {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  #bot {
+    width: 100%;
+  }
+
+  #container {
+    padding-top: 100px;
+  }
+  #pointBox {
+    position: relative;
+    left: 80%;
+    max-width: 200px;
+    bottom: 200px;
+    border-bottom-right-radius: 5%;
+    border-bottom-left-radius: 5%;
+    border: black;
+    border-radius: 1%;
+  }
+
+  #timeBox {
+    position: relative;
+    max-width: 200px;
+    top: -90px;
+    bottom: 200px;
+    border-bottom-right-radius: 5%;
+    border-bottom-left-radius: 5%;
+    border: black;
+    border-radius: 1%;
+  }
+  
+  #points {
+    width: 90px;
+    height: 60px;
+    max-width: 90px;
+    max-height: 50px;
+    
+    
+  }
+
+  #time {
+    max-width: 90px;
+    max-height:50px;
+ }
+
+ .stats {
+  border: 1px;
+  background: #cdced3;
+  margin: 0%;   
+  border-top-left-radius: 5%;
+  border-top-right-radius: 5%;
+  height: 50px;
+  max-width: 90px;
+  font-size: 1.5em;
+  text-align: center;
+
+}
+
+}
+
+@media only screen and (max-width: 450px ) {
+  btn {
+    font-size: 1em;
+  }
+  
+  #yes {
+    max-width: 75px;
+    max-height: 75px;
+    margin-left: 7px;
+  }
+  
+  #no {
+    max-width: 75px;
+    max-height: 75px;
+
+  }
+  
+  #top {
+    top: 100px;
+  }
+
+  #bot {
+    max-height: 250px;
+    bottom: 550px;
+  }
+
+  #card {
+    bottom: 150px;
+  }
+
+  #container {
+    padding-top: 100px;
+  }
+  #pointBox {
+    width: 75px;
+    bottom: 175px;
+    border-bottom-right-radius: 5%;
+    border-bottom-left-radius: 5%;
+    border: black;
+    border-radius: 1%;
+  }
+
+  #timeBox {
+    position: relative;
+    max-width: 75px;
+    top: -71px;
+    border-bottom-right-radius: 5%;
+    border-bottom-left-radius: 5%;
+    border: black;
+    border-radius: 1%;
+  }
+  
+  #points {
+    max-width: 75px;
+    max-height: 50px;
+    
+  }
+
+  #time {
+    max-width: 75px;
+    max-height:50px;
+ }
+
+ .card-body {
+   bottom: 150px;
+ }
+
+ .col {
+  background-size: 50px;
+   max-width: 65px;
+   max-height: 100px;
+   margin: 5px;
+ }
+
+ .text-success {
+   font-size: 1.75em;
+ }
+
+ .text-danger {
+   font-size: 1.1em;
+ }
+
+ .text-primary {
+  font-size: .9em;
+}
+
+
+  .stats {
+    border: 1px;
+    background: #cdced3;
+    margin: 0%;   
+    border-top-left-radius: 5%;
+    border-top-right-radius: 5%;
+    height: 50px;
+    max-width: 85px;
+    font-size: 1.5em;
+    text-align: center;
+
+  }
+
+  .timeKeeper {
+    border-radius: 2%;
+  }
+
+  .zCard {
+    max-height: 200px;
+  }
+  
+}

@@ -1,7 +1,7 @@
 html, body, main {
    height: 100%;
    width: 100%;
-   }
+}
 
 #yes {
       border-top-left-radius: 25px;
@@ -18,16 +18,16 @@ html, body, main {
 }   
 
 #win {
-      display: none;
       z-index: 6;
       background: #0fb8ad;
       position: absolute;
       min-width: 100%;
       min-height: 100%;
       animation-name: fadeIn;
-      animation-duration: 3s;
+      animation-duration: .05s;
       animation-iteration-count: 1;
 }
+
 #time {
       margin-bottom: 5%;
       padding-top: 10%;
@@ -38,13 +38,16 @@ html, body, main {
       animation-duration: 1s;
       animation-iteration-count: infinite;
 }
+
 #points {
       padding-top: 10%;
       
 }
+
 .margin-top {
       margin-top: 50px;
 }
+
 .scoreB {
       background: grey;
       width: 100%;
@@ -53,11 +56,12 @@ html, body, main {
       animation-iteration-count: 2;
       animation-direction: alternate-reverse;
 }
+
 .zCard {
       border-top-left-radius: 25px;
       border-top-Right-radius: 25px;
       border-bottom-left-radius: 5px;
-      top: 50%;
+      top: 25%;
       margin-left: 25%;
       margin-right: 25%;
       width: 50%;
@@ -65,15 +69,15 @@ html, body, main {
       z-index: 7;
       position: absolute;
       box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-      animation-name: glowing;
-      animation-duration: 2s;
-      animation-iteration-count: infinite;
-      animation-direction: alternate-reverse;
+      animation-name: winUp;
+      animation-duration: 7s;
+      animation-iteration-count: 1;
+      animation-direction: normal;
 }
 
 .container {
    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-   }
+}
 
 .card {
    z-index: 3;
@@ -85,7 +89,7 @@ html, body, main {
    display: none;
    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
    border: 1px solid #4195fc
-   }
+}
 
 .combo {
       background-color: greenyellow;
@@ -93,6 +97,8 @@ html, body, main {
       animation-duration: .5s;
       animation-iteration-count: 1;
 }
+
+
 /* DEFAULT CARD STYLES */
 .col {
    cursor: pointer;
@@ -132,13 +138,13 @@ html, body, main {
       background-repeat: no-repeat;
       background-position: center;
       background-size: 30px 30px;
-      border-radius: 35%;
+      border-radius: 0%;
       width: 100%;
       height: 100%;
       animation-name: glowing;
       animation-duration: .25s;
       animation-iteration-count: 1;
-      }
+}
 
 .gear {
       display: none;
@@ -394,6 +400,15 @@ html, body, main {
       }
 }
 
+@keyframes winUp {
+      0% {transform: translate(0, -400px);
+         -ms-transform: translate(0px, -400px); /* IE 9 */
+         -webkit-transform: translate(0px, -400px); /* Safari */;}
+      100% {transform: translate(0,0);
+         -ms-transform: translate(0, 0); /* IE 9 */
+         -webkit-transform: translate(0, 0);} /* Safari */
+   }
+
 @keyframes moveUp {
    0% {transform: translate(0,-200px);
       -ms-transform: translate(0px, -200px); /* IE 9 */
@@ -413,6 +428,7 @@ html, body, main {
       -webkit-transform: translate(0, 550px);      
    }
 }
+
 
 @keyframes shake {
    0% { transform: translate(1px, 1px) rotate(0deg); }

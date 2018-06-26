@@ -1,8 +1,12 @@
 document.addEventListener('DOMContentLoaded', function () {
     tileSummons.create();
+    let x = document.getElementById("win");
+    console.log("X =" + x);
+    document.getElementById("win").style.display = "none";
     document.getElementById("intro").volume = 0.2
     document.getElementById("begin").volume = 0.2
     document.getElementById("start").addEventListener("click", animators.hideTrans);
+
 ;
     
 });
@@ -98,7 +102,6 @@ function pairBinding(t, ele, element) {
             let totalCount = cardFinder(1)
                 // if total count returns true: a pair is found - ref cardFinder(x) func //
                 if (totalCount == 1 ) {
-                    audioSets.ding();
                     ele.classList.toggle("pairA");
                     console.log("PAIR FOUND");
                     // PREVENTS RESET
@@ -111,7 +114,6 @@ function pairBinding(t, ele, element) {
         if (element == 3 || element == 4) {
             let totalCount = cardFinder(2)
                 if (totalCount == 1 ) {
-                    audioSets.ding();
                     console.log("PAIR FOUND");
                     EventRemoval(2);
                     stats.points(20);
@@ -121,7 +123,6 @@ function pairBinding(t, ele, element) {
         if (element == 5 || element == 6) { 
             let totalCount = cardFinder(3)
                 if (totalCount == 1 ) {
-                    audioSets.ding();
                     console.log("PAIR FOUND")
                     EventRemoval(3);
                     stats.points(20);
@@ -131,7 +132,6 @@ function pairBinding(t, ele, element) {
         if (element == 7 || element == 8) {
         let totalCount = cardFinder(4)
                 if (totalCount == 1 ) {
-                    audioSets.ding();
                     console.log("PAIR FOUND")
                     EventRemoval(4);
                     stats.points(20);
@@ -141,7 +141,6 @@ function pairBinding(t, ele, element) {
         if (element == 9 || element == 10) {
         let totalCount = cardFinder(5)
                 if (totalCount == 1 ) {
-                    audioSets.ding();
                     console.log("PAIR FOUND")
                     EventRemoval(5);
                     stats.points(20);
@@ -151,7 +150,6 @@ function pairBinding(t, ele, element) {
         if (element == 11 || element == 12) {
             let totalCount = cardFinder(6)
             if (totalCount == 1 ) {
-                audioSets.ding();
                 console.log("PAIR FOUND")
                 EventRemoval(6);
                 stats.points(20);
@@ -161,7 +159,6 @@ function pairBinding(t, ele, element) {
         if (element == 13 || element == 14) {
             let totalCount = cardFinder(7)
                 if (totalCount == 1 ) {
-                    audioSets.ding();
                     console.log("PAIR FOUND")
                     EventRemoval(7);
                     stats.points(20);
@@ -171,7 +168,6 @@ function pairBinding(t, ele, element) {
         if (element == 15 || element == 16) {
             let totalCount = cardFinder(8)
             if (totalCount == 1 ) {
-                audioSets.ding();
                 console.log("PAIR FOUND")
                 EventRemoval(8);
                 stats.points(20);
@@ -252,8 +248,11 @@ function EventRemoval(a) {
         //WINNING //
         if (pairsOverall == 16) {
             console.log(pairsOverall);
-            showWin();
+            audioSets.win();
+            document.getElementById("win").style.display = "block";
             tileSummons.restart();
+        } else {
+            audioSets.ding();
         }
     }
 }
@@ -291,6 +290,7 @@ function showWin() {
 
 function hideWin() {
     document.getElementById("win").style.display = "none";
+    audioSets.intro();
 }
 // CARD CREATE
 function populate() {
@@ -519,7 +519,6 @@ const tileSummons = {
         setTimeout(function() { 
             document.getElementById("card").style.display = "block";
             document.getElementById("container").style.display = "block"; 
-            audioSets.intro();
             }, 1000);
             
         
@@ -528,11 +527,11 @@ const tileSummons = {
         
     restart : function () {
         setTime = 0;
+        document.getElementById("win").style.display = "block";
         m = 0;
         s = 0;
         restart = true;
         //VALUE RESET
-        audioSets.intro();
         pairsOverall = 0;
         t = false;
         //prevents event handler from firing in standby mode//
@@ -573,7 +572,7 @@ const audioSets = {
 
         },
     start : function () {
-        document.getElementById("begin").volume = 0.2
+        document.getElementById("begin").volume = 0.2;
         document.getElementById("begin").play();
         
         },
@@ -589,7 +588,11 @@ const audioSets = {
                 document.getElementById("begin").pause();
             }
         }
-        }
+        },
+    win : function () {
+        document.getElementById("winning").volume = .2;
+        document.getElementById("winning").play();
+    }
 
 
 
