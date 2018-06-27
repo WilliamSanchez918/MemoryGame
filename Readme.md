@@ -23,7 +23,18 @@ Bootstrap 4: Utilized for intial html elements. Vanilla JS was used to code this
 Produced by Valkour (Watermark I created for this project), and I publically hosted at
 http://valkour.com/memory.html.
 
-UPDATE REQUESTS:
+
+#UPDATE REQUESTS#
 
 Create a seperate branch, and label accordingly with obj, func, or variable references / and or changes
+
+
+
+###DEPENDENCIES###
+
+- Bootstrap 4 UI
+- ajax/Popper (avaliable via cdnjs.cloudflare.com)
+- Jquery (3.2.1.slim.min)
+
+- All code within 'include.js' was written using basic vanilla js.
 
