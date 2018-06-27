@@ -3,6 +3,89 @@ html, body, main {
    width: 100%;
 }
 
+
+
+#winStats {
+      background: cornsilk;
+      border-bottom-left-radius: 5%;
+      border-bottom-right-radius: 5%;
+}
+
+#winRating{
+      background: white;
+      border-radius: 25%;
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+}
+#winPoints{
+      background: white;
+      border-radius: 25%;
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+#winTime {
+      background:  white;
+      border-radius: 25%;
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+#ratingBox {
+      font-size: .75em;
+      
+      border-top-left-radius: 5px;
+      border-bottom-left-radius: 5px;
+      position: absolute;
+      top: -5px;
+      left: 115px;
+      height: 105px;
+      width: 130px;
+      padding-top: 5px;
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+}
+
+#ratingHeader {
+      font-size: 1.75em;
+      background: #cdced3;
+      
+}
+#rating {
+      font-size: 2em;
+      position: relative;
+      margin-left: 80px;
+      margin-top: -35px;
+      margin-bottom: 100px;;
+      
+}
+
+#moveCounter {
+      font-size: .75em;
+      
+      border-top-left-radius: 5px;
+      border-bottom-left-radius: 5px;
+      position: absolute;
+      top: 62px;
+      left: 130px;
+      height: 35px;
+      padding-top: 5px;
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+}
+
+#movesHeader {
+      font-size: 1.75em;
+      background: #cdced3;
+      
+}
+#moves {
+      font-size: 2em;
+      position: relative;
+      margin-left: 80px;
+      margin-top: -35px;
+      margin-bottom: 100px;;
+      
+}
+
+
 #yes {
       border-top-left-radius: 25px;
       border-top-Right-radius: 25px;
@@ -180,6 +263,30 @@ html, body, main {
       width: 100%;
 }
 
+/* RESTART ICON */
+.restart {
+      display: none;
+      border-radius: 5%;
+      background-image: url("img/sync.svg");
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: 15px; 
+      height: 25px;
+      width: 25px;
+      position: absolute;
+      margin-bottom: 0px;
+      /* margin-top: 500px; */
+      margin-bottom: 500px;
+      z-index: 8;
+      bottom: 0px;
+      top: 50px;
+      left: 250px;
+      }
+.restart#hover {
+      animation-name: rotate;
+      animation-duration: 2s;
+}   
+
 /* Pair 1 - HEARTS */
 .pairA {
    background-color: pink;
@@ -310,10 +417,17 @@ html, body, main {
       opacity: 0;
       transition: visibility 0s 2s, opacity 2s linear;
     }
+
 .block {
       visibility: visible;
       opacity: 1;
       transition: visibility 0s 2s, opacity 2s linear;
+}
+
+.shake {
+      animation-name: shake;
+      animation-duration: 2s;
+      animation-iteration-count: 1;
 }
 
 .timeKeeper {
@@ -333,6 +447,17 @@ html, body, main {
       animation-duration: 5s;
       animation-iteration-count: 1;
 }
+
+.fadeinlong {
+      animation-name: fadeIn;
+      animation-duration: 10s;
+      animation-iteration-count: 1;
+}
+
+@keyframes flip {
+      0% {transform: rotate3d(0,360deg,360deg,90deg);}
+}
+
 @keyframes fadeIn {
       0% {opacity: 0;}
       100% {opacity: 1;}

@@ -24,8 +24,11 @@ let topTranz = false;
 let setTime = 0;
 let m = 0;
 let s = 0;
-let points = 0
+let points = 0;
+let totalMoves = 0;
 let restart = false;
+let rating = "A+";
+
 
 ////////////// FUNCTION DECLARATIONS /////////////
 
@@ -70,6 +73,7 @@ function pairBinding(t, ele, element) {
     animationZ = false;
     if (t == false) {
         let a = document.querySelectorAll(".col").length;
+        
         for (let d = 1; d <= a; d++) {
             let x = d;
             let b = document.getElementById(d);
@@ -248,9 +252,16 @@ function EventRemoval(a) {
         //WINNING //
         if (pairsOverall == 16) {
             console.log(pairsOverall);
+            let ratingX = rating;
+            let pointsX = points;
+            let timeX = setTime;
+            document.getElementById("restart").style.display = "none";
+            setTimeout(function() {winVals(ratingX,pointsX,timeX)}, 4000);
             audioSets.win();
             document.getElementById("win").style.display = "block";
+            
             tileSummons.restart();
+
         } else {
             audioSets.ding();
         }
@@ -260,6 +271,7 @@ function EventRemoval(a) {
 //Card EVENT LISTENER FUNC -  Select //
 function cardSelect() {
     if (animationZ == false) {
+        
         let stopFunc = false;
         let element = this.id;
         console.log(element);
@@ -267,6 +279,7 @@ function cardSelect() {
         if (ele.classList.contains("inUse")) {
             return console.log("Card Already Flipped")
         } else {
+            stats.moves(1);
             ele.classList.toggle("inUse");
             // CHECK 1
             t = true;
@@ -285,7 +298,24 @@ function cardSelect() {
 
 //button click //prompt on restart - simple display = none for #yes, #win .zcard. - or generate elements via func
 function showWin() {
-    document.getElementById("win").style.display = "block";
+    document.getElementById('winRating').textContent = "Rating";
+    document.getElementById('winRating').classList.toggle("shake");
+    document.getElementById('winPoints').textContent = "Points";
+    document.getElementById('winPoints').classList.toggle("shake");
+    document.getElementById('winTime').classList.toggle("shake");
+    document.getElementById('winTime').textContent = "Time";
+    
+}
+
+function winVals(ratingX,pointsX,timeX) {
+    console.log("Rating:" + ratingX + ". winPoints:" + pointsX + ". Time:" + time)
+    document.getElementById('winRating').textContent = ratingX;
+    document.getElementById('winRating').classList.toggle("shake");
+    document.getElementById('winPoints').textContent = pointsX;
+    document.getElementById('winPoints').classList.toggle("shake");
+    document.getElementById('winTime').textContent = timeX;
+    document.getElementById('winTime').classList.toggle("shake");
+    
 }
 
 function hideWin() {
@@ -293,13 +323,16 @@ function hideWin() {
     audioSets.intro();
 }
 // CARD CREATE
-function populate() {
+function populate(pairSize, softR) {
     let fragment = document.createDocumentFragment();
     for (let i = 0; i < pairSize; i++){
         let newElement = document.createElement('div');
         let tileLoc = cardLoc[i]
         newElement.innerText = '';
         newElement.classList.add("col");
+        if (softR == false) {
+            newElement.classList.add("col2")
+        }
         newElement.classList.add("col2")
         newElement.id = tileLoc;
         //EVENT LISTENERS //
@@ -372,6 +405,25 @@ const stats = {
         document.getElementById("scoreCard").classList.remove('fadein');
         document.getElementById('points').classList.add('combo');
         return points;
+    },
+    moves : function(x) {
+        totalMoves = totalMoves + x;
+        document.getElementById('moves').textContent = totalMoves;
+        stats.rating(totalMoves);
+    },
+    rating: function(totalMoves) {
+        let x = totalMoves;
+        if (x <= 32) {
+            rating = "A+";
+        } else if (x <= 48) {
+            rating = "B+";
+        } else if (x <= 64) {
+            rating = "B-";
+        } else if (x <= 80) {
+            rating = "C-";
+        } else rating = "F--"
+        document.getElementById('rating').textContent = rating;
+
     }
 }
 //ANIMATIONS
@@ -415,6 +467,7 @@ const animators = {
         animationZ = false;
         topTranz = true;
         botTranz = true;
+        document.getElementById("restart").style.display = "block";
         
         animators.botTrans();
         animators.topTrans();
@@ -425,6 +478,9 @@ const animators = {
 
         //card effect loop //
         debufLoop();
+
+        //win screen default
+        showWin()
 
     },
     cardshaker: function(ele) {
@@ -489,10 +545,12 @@ const parentIdNumber = {
 
 //TILE CREATION
 const tileSummons = {
-    create : function (e) {
+    create : function (e,) {
         pairSize = 16;
         y = cardLoc;
         restart = false;
+        totalMoves = 0;
+        rating = "A+";
 
         //calculates correct tile/pair matching and randomizes tiles //
         if (e == false || e == undefined) {
@@ -513,6 +571,7 @@ const tileSummons = {
 
         // Tile Population //
         populate(pairSize)
+        softR = false;
 
         // REVEAL //
         console.log('the DOM is ready to be interacted with!'); 
@@ -553,6 +612,24 @@ const tileSummons = {
             }
         let e = true;
         setTimeout(function() { tileSummons.create(e); }, 1000);
+
+    },
+    softReset : function () {
+        setTime = 0;
+        m = 0;
+        s = 0;
+        pairsOverall = 0;
+        restart = true;
+        t = false;
+        x = null;
+        softR = true
+        for (a = 1; a <= 16; a++) {
+            let d = document.getElementById(a);
+            console.log(d);
+            d.parentElement.removeChild(d);  
+            }
+        let e = true;
+        tileSummons.create(e, softR)
 
     }
 }

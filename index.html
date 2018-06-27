@@ -25,6 +25,14 @@
         <h2 class="stats">Points</h2>
         <h2 class=" text-center dropdown bg-light font-weight-bold" id="points">0</h2>
       </div>
+      <div class="" id="moveCounter">
+        <h2 class="font-weight-bold" id="movesHeader">Moves:</h2>
+        <h2 class ="font-weight-bold text-danger" id="moves">0</h2>
+      </div>
+      <div class="" id="ratingBox">
+          <h2 class="font-weight-bold" id="ratingHeader">Rating:</h2>
+          <h2 class ="font-weight-bold text-danger" id="rating">A++</h2>
+        </div>
         <p class="gear"></p>
     </div>
       <div class="" id="top"></div>
@@ -58,8 +66,13 @@
     <h1 class="text-center text-success font-weight-bold">WINNER!</h1>
     <div class="scoreB" id="winScoreB"></div>
     <h3 class="text-center text-danger font-weight-light">PLAY AGAIN?</h3>
-    <button type="button" class="btn btn-dark" id="yes" onclick="hideWin();">YES</button>
-    <button type="button" class="btn btn-dark" id="yes" onclick="hideWin();">YES</button>
+    <button type="button" class="btn btn-info" id="yes" onclick="hideWin();">YES</button>
+    <button type="button" class="btn btn-info" id="yes" onclick="hideWin();">YES</button>
+    <div class="text-center text-primary" id="winStats"> YOUR STATS:
+      <h2 class="text-center" id= "winRating">Rating</h2>
+      <h2 class="text-center" id="winPoints">Points</h2>
+      <h2 class="text-center" id="winTime">Time</h2>
+    </div>
   </div>
   
 </div>
@@ -72,6 +85,7 @@
       </div>
       <div class="row justify-content-center" id="row4">
       </div>
+      <button type="button" class="restart fadeinlong" id="restart" onclick="tileSummons.softReset();"></button>
       
     </div>
 
