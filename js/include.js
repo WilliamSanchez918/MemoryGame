@@ -460,6 +460,7 @@ const animators = {
         }
     },
     hideTrans : function() {
+        let roundPoints = points;
         audioSets.pause();
         let x = document.getElementById("card");
         x.classList.toggle("glow");
@@ -615,6 +616,9 @@ const tileSummons = {
 
     },
     softReset : function () {
+        document.getElementById('time').textContent = "0:00";
+        document.getElementById('rating').textContent = "A++";
+        document.getElementById('moves').textContent = "0";
         setTime = 0;
         m = 0;
         s = 0;
@@ -622,6 +626,7 @@ const tileSummons = {
         restart = true;
         t = false;
         x = null;
+ 
         softR = true
         for (a = 1; a <= 16; a++) {
             let d = document.getElementById(a);
